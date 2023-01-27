@@ -36,6 +36,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        questions.shuffle()
         questionLabel.text = questions[0].text
         
     }
@@ -46,14 +47,17 @@ class ViewController: UIViewController {
         let rightAnswer = questions[currentQuestion].answer
         
         if userAnswer == rightAnswer {
+            sender.backgroundColor = .green
             print("Right")
             score += 1
         } else {
+            sender.backgroundColor = .red
             print("Wrong")
         }
         
         if currentQuestion + 1 < questions.count{
             currentQuestion += 1
+            
         } else {
             currentQuestion = 0
         }
@@ -61,9 +65,13 @@ class ViewController: UIViewController {
     }
     
     func updateUI(){
-        questionLabel.text = questions[currentQuestion].text
-        progressBar.progress = Float(currentQuestion) / Float(questions.count - 1)
-        scoreLabel.text = "Score : \(score)"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [self] in
+            questionLabel.text = questions[currentQuestion].text
+            progressBar.progress = Float(currentQuestion) / Float(questions.count - 1)
+            scoreLabel.text = "Score : \(score)"
+            trueButton.backgroundColor = .none
+            falseButton.backgroundColor = .none
+        }
     }
 }
 
