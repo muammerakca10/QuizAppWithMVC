@@ -45,14 +45,14 @@ class ViewController: UIViewController {
             print("Wrong")
         }
         
-        
+        quizBrain.goNextQuestion()
         updateUI()
     }
     
     func updateUI(){
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){ [self] in
-            questionLabel.text = getQuestionText()
-            progressBar.progress = Float(currentQuestion) / Float(questions.count - 1)
+            questionLabel.text = quizBrain.getQuestionText()
+            progressBar.progress = quizBrain.getProgress()
             scoreLabel.text = "Score : \(score)"
             trueButton.backgroundColor = .none
             falseButton.backgroundColor = .none

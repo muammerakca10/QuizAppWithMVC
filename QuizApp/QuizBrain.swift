@@ -44,6 +44,10 @@ struct QuizBrain {
     }
     
     func getQuestionText() -> String {
-        
+        return questions[currentQuestion].text
+    }
+    
+    func getProgress() -> Float {
+        return Float(currentQuestion) / Float(questions.count - 1)
     }
 }
