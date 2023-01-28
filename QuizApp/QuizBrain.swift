@@ -10,7 +10,8 @@ import Foundation
 struct QuizBrain {
     
     var currentQuestion = 0
-    
+    var score = 0
+
     
     var questions = [Question(text: "A slug's blood is green.", answer: "True"),
                      Question(text: "Approximately one quarter of human bones are in the feet.", answer: "True"),
@@ -49,5 +50,13 @@ struct QuizBrain {
     
     func getProgress() -> Float {
         return Float(currentQuestion) / Float(questions.count - 1)
+    }
+    
+    mutating func incrementScore(){
+        score += 1
+    }
+    
+    func getScore() -> Int {
+        return score
     }
 }

@@ -10,11 +10,6 @@ import UIKit
 class ViewController: UIViewController {
     
     var quizBrain = QuizBrain()
-
-    var currentQuestion = 0
-    var score = 0
-    
-    
     
     //Outlets
     @IBOutlet weak var questionLabel: UILabel!
@@ -39,7 +34,8 @@ class ViewController: UIViewController {
         if isAnswerRight {
             sender.backgroundColor = .green
             print("Right")
-            score += 1
+            quizBrain.incrementScore()
+            
         } else {
             sender.backgroundColor = .red
             print("Wrong")
@@ -53,7 +49,7 @@ class ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){ [self] in
             questionLabel.text = quizBrain.getQuestionText()
             progressBar.progress = quizBrain.getProgress()
-            scoreLabel.text = "Score : \(score)"
+            scoreLabel.text = "Score : \(quizBrain.getScore())"
             trueButton.backgroundColor = .none
             falseButton.backgroundColor = .none
         }
